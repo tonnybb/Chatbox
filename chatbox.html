@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+        /* This style is used to prevent the HTML page from forwarding to the PHP page when the form (send button) is submitted. */
+        .hide { position:absolute; top:-1px; left:-1px; width:1px; height:1p}
+        
+        /* This styles the chatbox area */
+        #chat_message_placeholder{
+        	font-size: 17px;
+        	position: relative;
+			width: 340px;
+			height: 300px;
+			overflow: auto;
+            background-color: #CCCCCC;
+            padding-left: 5px;
+        }
+
+        #messagebox{
+            margin-left: 9px;
+            margin-top: 15px;
+            margin-bottom: 10px;
+        }
+
+        #username{
+            margin-top: 15px;
+        }
+
+        #sendbutton{
+            font-size: 20px;
+        }
+
+
+
+    </style>
+
+    <script type="text/javascript" src="chat.js"></script>
+    <script  type="text/javascript" src="//code.jquery.com/jquery-1.11.2.min.js"></script>
+
+
+</head>
+
+<!-- Run the functions when the body is loaded--> 
+<body onload = "showChatMessages(); checkUsername(); disableAutoComplete()">
+
+<br>
+<!-- This is the div that will be replaced by chat messages using .innerHTML property in chat.js--> 
+<div id="chat_message_placeholder"><b>Chat messages will be shown here</b></div>
+
+<!-- This prevents the html page from forwarding to the PHP page--> 
+<iframe name="hiddenFrame" class="hide"></iframe>
+
+<!-- This is the form that contains the username label and textbox, 
+the message label and textbox, and the "Send" button
+--> 
+<form action="postmessage.php" method="post" target="hiddenFrame">
+	Username: <input type="text" name="username" maxlength="12" size="10" id="username" onblur = "checkUsername();"><br>
+	Message: <input type="text" name="message" id="messagebox" maxlength="2000" size="34"><br>
+	<input type="submit" onclick = "clearFields();" value = "Send" id = "sendbutton">
+</form>
+
+</body>
+</html>
